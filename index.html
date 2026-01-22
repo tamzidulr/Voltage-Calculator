@@ -593,48 +593,97 @@
                         <p class="text-gray-600 text-xs lg:text-sm leading-relaxed mb-3">
                             Below is a formula wheel for Ohm's Law relationships between P, I, V, and R. To use the wheel, choose the variable to solve for in the middle of the wheel, then use the relationship for the two known variables within the cross section of the circle.
                         </p>
-                        <div class="bg-gray-50 rounded-lg p-4 flex justify-center">
-                            <div class="relative w-48 h-48 lg:w-64 lg:h-64">
-                                <!-- Circle -->
-                                <div class="absolute inset-0 border-4 border-blue-500 rounded-full"></div>
-                                
-                                <!-- Center circle -->
-                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 lg:w-20 lg:h-20 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xs lg:text-sm">
-                                    <div class="text-center">
-                                        <div>P</div>
-                                        <div>I</div>
-                                        <div>V</div>
-                                        <div>R</div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <!-- Mobile-friendly formula wheel -->
+                            <div class="block lg:hidden">
+                                <!-- Enhanced center circle with gradient -->
+                                <div class="mx-auto w-36 h-36 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg mb-6 relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-white opacity-10 rounded-full transform scale-75"></div>
+                                    <div class="relative text-center">
+                                        <div class="text-lg">P</div>
+                                        <div class="text-lg">I</div>
+                                        <div class="text-lg">V</div>
+                                        <div class="text-lg">R</div>
                                     </div>
                                 </div>
                                 
-                                <!-- Top - V -->
-                                <div class="absolute top-2 left-1/2 transform -translate-x-1/2 bg-white rounded-lg px-2 py-1 text-xs lg:text-sm font-semibold border border-gray-300">
-                                    V = I × R
+                                <!-- Enhanced formula cards with gradients and shadows -->
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 border-2 border-blue-300 shadow-md hover:shadow-lg transition-shadow">
+                                        <div class="font-mono text-sm font-bold text-blue-800">V = I × R</div>
+                                        <div class="text-xs text-blue-600 mt-2 font-medium">⚡ Voltage</div>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 border-2 border-green-300 shadow-md hover:shadow-lg transition-shadow">
+                                        <div class="font-mono text-sm font-bold text-green-800">I = V / R</div>
+                                        <div class="text-xs text-green-600 mt-2 font-medium">🔋 Current</div>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 border-2 border-purple-300 shadow-md hover:shadow-lg transition-shadow">
+                                        <div class="font-mono text-sm font-bold text-purple-800">R = V / I</div>
+                                        <div class="text-xs text-purple-600 mt-2 font-medium">🛡️ Resistance</div>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 border-2 border-orange-300 shadow-md hover:shadow-lg transition-shadow">
+                                        <div class="font-mono text-sm font-bold text-orange-800">P = V × I</div>
+                                        <div class="text-xs text-orange-600 mt-2 font-medium">💪 Power</div>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-4 border-2 border-red-300 shadow-md hover:shadow-lg transition-shadow">
+                                        <div class="font-mono text-sm font-bold text-red-800">P = I²R</div>
+                                        <div class="text-xs text-red-600 mt-2 font-medium">🔥 Power (I)</div>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-4 border-2 border-yellow-300 shadow-md hover:shadow-lg transition-shadow">
+                                        <div class="font-mono text-sm font-bold text-yellow-800">P = V²/R</div>
+                                        <div class="text-xs text-yellow-600 mt-2 font-medium">⚡ Power (V)</div>
+                                    </div>
                                 </div>
-                                
-                                <!-- Right - I -->
-                                <div class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white rounded-lg px-2 py-1 text-xs lg:text-sm font-semibold border border-gray-300">
-                                    I = V / R
-                                </div>
-                                
-                                <!-- Bottom - R -->
-                                <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-white rounded-lg px-2 py-1 text-xs lg:text-sm font-semibold border border-gray-300">
-                                    R = V / I
-                                </div>
-                                
-                                <!-- Left - P -->
-                                <div class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white rounded-lg px-2 py-1 text-xs lg:text-sm font-semibold border border-gray-300">
-                                    P = V × I
-                                </div>
-                                
-                                <!-- Diagonal formulas -->
-                                <div class="absolute top-1/4 right-1/4 bg-white rounded px-1 py-0.5 text-xs border border-gray-300">
-                                    P = I²R
-                                </div>
-                                
-                                <div class="absolute top-1/4 left-1/4 bg-white rounded px-1 py-0.5 text-xs border border-gray-300">
-                                    P = V²/R
+                            </div>
+                            
+                            <!-- Desktop version - enhanced wheel -->
+                            <div class="hidden lg:flex justify-center">
+                                <div class="relative w-72 h-72">
+                                    <!-- Enhanced outer circle with gradient -->
+                                    <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-indigo-100 border-4 border-blue-500 rounded-full shadow-xl"></div>
+                                    
+                                    <!-- Inner decorative circle -->
+                                    <div class="absolute inset-4 bg-gradient-to-br from-white to-blue-50 border-2 border-blue-300 rounded-full"></div>
+                                    
+                                    <!-- Enhanced center circle with gradient -->
+                                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg relative overflow-hidden">
+                                        <div class="absolute inset-0 bg-white opacity-20 rounded-full transform scale-75"></div>
+                                        <div class="relative text-center">
+                                            <div class="text-lg font-bold">P</div>
+                                            <div class="text-lg font-bold">I</div>
+                                            <div class="text-lg font-bold">V</div>
+                                            <div class="text-lg font-bold">R</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Top - V with gradient -->
+                                    <div class="absolute top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl px-4 py-2 text-sm font-bold shadow-lg border-2 border-blue-400">
+                                        V = I × R
+                                    </div>
+                                    
+                                    <!-- Right - I with gradient -->
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl px-4 py-2 text-sm font-bold shadow-lg border-2 border-green-400">
+                                        I = V / R
+                                    </div>
+                                    
+                                    <!-- Bottom - R with gradient -->
+                                    <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl px-4 py-2 text-sm font-bold shadow-lg border-2 border-purple-400">
+                                        R = V / I
+                                    </div>
+                                    
+                                    <!-- Left - P with gradient -->
+                                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl px-4 py-2 text-sm font-bold shadow-lg border-2 border-orange-400">
+                                        P = V × I
+                                    </div>
+                                    
+                                    <!-- Diagonal formulas with gradients -->
+                                    <div class="absolute top-1/4 right-1/4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg px-3 py-1 text-sm font-bold shadow-md border-2 border-red-400">
+                                        P = I²R
+                                    </div>
+                                    
+                                    <div class="absolute top-1/4 left-1/4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg px-3 py-1 text-sm font-bold shadow-md border-2 border-yellow-400">
+                                        P = V²/R
+                                    </div>
                                 </div>
                             </div>
                         </div>
