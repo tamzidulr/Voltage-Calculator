@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voltage Calculator - Free Ohm's Law & Electrical Circuit Calculator Online</title>
+    <meta name="description" content="Free online voltage calculator for Ohm's Law, series and parallel circuits. Calculate voltage, current, resistance, and power instantly. Professional electrical engineering tool.">
+    <meta name="keywords" content="voltage calculator, ohm's law calculator, electrical calculator, circuit calculator, voltage drop calculator, resistance calculator, current calculator, power calculator, series circuit, parallel circuit, electrical engineering, ohm's law formula">
+    <meta name="author" content="Voltage Calculator">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://voltagecalculator.com">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voltagecalculator.com">
+    <meta property="og:title" content="Voltage Calculator - Free Ohm's Law & Electrical Circuit Calculator">
+    <meta property="og:description" content="Free online voltage calculator for Ohm's Law, series and parallel circuits. Calculate voltage, current, resistance, and power instantly.">
+    <meta property="og:image" content="https://voltagecalculator.com/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://voltagecalculator.com">
+    <meta property="twitter:title" content="Voltage Calculator - Free Ohm's Law & Electrical Circuit Calculator">
+    <meta property="twitter:description" content="Free online voltage calculator for Ohm's Law, series and parallel circuits. Calculate voltage, current, resistance, and power instantly.">
+    <meta property="twitter:image" content="https://voltagecalculator.com/og-image.jpg">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Voltage Calculator",
+        "description": "Free online voltage calculator for Ohm's Law, series and parallel circuits. Calculate voltage, current, resistance, and power instantly.",
+        "url": "https://voltagecalculator.com",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "Voltage Calculator"
+        }
+    }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .tab-active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .card-selected {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+            border-color: #3b82f6;
+        }
+        .card-selected .text-gray-500 {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .input-field {
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .calculate-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            transition: all 0.3s ease;
+        }
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">⚡ Voltage Calculator</h1>
+            <p class="text-gray-600">Free Ohm's Law & Electrical Circuit Calculator Online</p>
+            <p class="text-sm text-gray-500 mt-2">Calculate voltage, current, resistance, and power instantly. Professional electrical engineering tool for students and professionals.</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="flex justify-center mb-6 lg:mb-8">
+            <div class="bg-white rounded-lg shadow-md p-1 inline-flex max-w-full overflow-x-auto">
+                <button id="tab-ohms" class="tab-btn px-4 lg:px-6 py-2 lg:py-3 rounded-md font-medium text-sm lg:text-base transition-all duration-200 tab-active whitespace-nowrap" onclick="switchTab('ohms')">
+                    Ohm's Law
+                </button>
+                <button id="tab-series" class="tab-btn px-4 lg:px-6 py-2 lg:py-3 rounded-md font-medium text-sm lg:text-base transition-all duration-200 text-gray-600 hover:text-gray-800 whitespace-nowrap" onclick="switchTab('series')">
+                    Series
+                </button>
+                <button id="tab-parallel" class="tab-btn px-4 lg:px-6 py-2 lg:py-3 rounded-md font-medium text-sm lg:text-base transition-all duration-200 text-gray-600 hover:text-gray-800 whitespace-nowrap" onclick="switchTab('parallel')">
+                    Parallel
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
+            <!-- Main Content Area -->
+            <div class="xl:col-span-2">
+                <!-- Ohm's Law Section -->
+                <div id="ohms-section" class="tab-content">
+                    <!-- What are you solving for? -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">What are you solving for?</h2>
+                        <p class="text-sm text-gray-600 mb-4">Use our advanced voltage calculator to solve for voltage, current, resistance, or power using Ohm's Law formulas. Perfect for electrical engineering calculations and circuit analysis.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div id="card-voltage" class="calc-card card-hover bg-white border-2 border-gray-200 rounded-xl p-4 text-center cursor-pointer transition-all duration-200 card-selected" onclick="selectCalculation('voltage')">
+                                <div class="text-2xl sm:text-3xl mb-2">⚡</div>
+                                <div class="font-semibold text-sm sm:text-base">Voltage</div>
+                                <div class="text-xs sm:text-sm text-gray-500">V - Volts</div>
+                            </div>
+                            <div id="card-current" class="calc-card card-hover bg-white border-2 border-gray-200 rounded-xl p-4 text-center cursor-pointer transition-all duration-200" onclick="selectCalculation('current')">
+                                <div class="text-2xl sm:text-3xl mb-2">🔋</div>
+                                <div class="font-semibold text-sm sm:text-base">Current</div>
+                                <div class="text-xs sm:text-sm text-gray-500">I - Amps</div>
+                            </div>
+                            <div id="card-resistance" class="calc-card card-hover bg-white border-2 border-gray-200 rounded-xl p-4 text-center cursor-pointer transition-all duration-200" onclick="selectCalculation('resistance')">
+                                <div class="text-2xl sm:text-3xl mb-2">🛡️</div>
+                                <div class="font-semibold text-sm sm:text-base">Resistance</div>
+                                <div class="text-xs sm:text-sm text-gray-500">R - Ohms</div>
+                            </div>
+                            <div id="card-power" class="calc-card card-hover bg-white border-2 border-gray-200 rounded-xl p-4 text-center cursor-pointer transition-all duration-200" onclick="selectCalculation('power')">
+                                <div class="text-2xl sm:text-3xl mb-2">💪</div>
+                                <div class="font-semibold text-sm sm:text-base">Power</div>
+                                <div class="text-xs sm:text-sm text-gray-500">P - Watts</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enter known values -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Enter known values (any 2)</h2>
+                        <div class="space-y-4">
+                            <div id="input-current" class="input-group">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">CURRENT (I)</label>
+                                <div class="relative">
+                                    <input type="number" id="current-value" class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none" placeholder="0.00" step="any">
+                                    <span class="absolute right-4 top-3 text-gray-500">Amps</span>
+                                </div>
+                            </div>
+                            <div id="input-resistance" class="input-group">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">RESISTANCE (R)</label>
+                                <div class="relative">
+                                    <input type="number" id="resistance-value" class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none" placeholder="0.00" step="any">
+                                    <span class="absolute right-4 top-3 text-gray-500">Ohms</span>
+                                </div>
+                            </div>
+                            <div id="input-power" class="input-group">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">POWER (P)</label>
+                                <div class="relative">
+                                    <input type="number" id="power-value" class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none" placeholder="0.00" step="any">
+                                    <span class="absolute right-4 top-3 text-gray-500">Watts</span>
+                                </div>
+                            </div>
+                            <div id="input-voltage" class="input-group hidden">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">VOLTAGE (V)</label>
+                                <div class="relative">
+                                    <input type="number" id="voltage-value" class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none" placeholder="0.00" step="any">
+                                    <span class="absolute right-4 top-3 text-gray-500">Volts</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="calculateOhmsLaw()" class="calculate-btn w-full mt-6 text-white py-3 rounded-lg font-semibold text-lg">
+                            Calculate Result →
+                        </button>
+                        <div id="result-display" class="hidden mt-6 p-6 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl text-white">
+                            <div class="text-2xl font-bold mb-2">Result</div>
+                            <div id="result-value" class="text-3xl font-bold"></div>
+                            <div id="result-unit" class="text-lg opacity-90"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Series Section -->
+                <div id="series-section" class="tab-content hidden">
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-xl font-semibold text-gray-800">Series Circuit Calculator</h2>
+                                <p class="text-sm text-gray-600 mt-1">Calculate total resistance and current in series circuits. Professional voltage calculator for electrical engineering.</p>
+                            </div>
+                            <button onclick="addSeriesResistor()" class="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-sm">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                Add Resistor
+                            </button>
+                        </div>
+
+                        <!-- System Voltage Input (Optional) -->
+                        <div class="mb-6">
+                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-2">System Voltage (Optional)</label>
+                            <div class="relative">
+                                <input type="number" id="series-voltage" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-lg" placeholder="0.00" step="any">
+                                <span class="absolute right-4 top-3 text-gray-500 text-lg">Volts</span>
+                            </div>
+                        </div>
+
+                        <!-- Resistor Inputs -->
+                        <div class="space-y-4 mb-6">
+                            <div id="series-resistors">
+                                <div class="series-resistor-input">
+                                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-2">R1 Resistance</label>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="relative flex-1">
+                                            <div class="absolute left-4 top-3 text-gray-400 text-lg">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                                                </svg>
+                                            </div>
+                                            <input type="number" class="series-resistor w-full pl-12 pr-16 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-lg" placeholder="0.00" step="any">
+                                            <span class="absolute right-4 top-3 text-gray-500 text-lg">Ω</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="series-resistor-input">
+                                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-2">R2 Resistance</label>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="relative flex-1">
+                                            <div class="absolute left-4 top-3 text-gray-400 text-lg">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                                                </svg>
+                                            </div>
+                                            <input type="number" class="series-resistor w-full pl-12 pr-16 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-lg" placeholder="0.00" step="any">
+                                            <span class="absolute right-4 top-3 text-gray-500 text-lg">Ω</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="calculateSeries()" class="calculate-btn w-full text-white py-3 rounded-lg font-semibold text-lg">
+                            Solve Series Circuit →
+                        </button>
+                        
+                        <div id="series-result" class="hidden mt-6 p-6 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl text-white">
+                            <div class="text-2xl font-bold mb-2">Total Resistance</div>
+                            <div id="series-result-value" class="text-3xl font-bold"></div>
+                            <div class="text-lg opacity-90">Ohms (Ω)</div>
+                            <div id="series-current-result" class="mt-4 hidden">
+                                <div class="text-lg font-semibold mb-1">Total Current</div>
+                                <div id="series-current-value" class="text-2xl font-bold"></div>
+                                <div class="text-base opacity-90">Amps (A)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parallel Section -->
+                <div id="parallel-section" class="tab-content hidden">
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-xl font-semibold text-gray-800">Parallel Circuit Calculator</h2>
+                                <p class="text-sm text-gray-600 mt-1">Calculate total resistance and current in parallel circuits. Advanced voltage calculator for complex electrical analysis.</p>
+                            </div>
+                            <button onclick="addParallelResistor()" class="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-sm">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                Add Resistor
+                            </button>
+                        </div>
+
+                        <!-- System Voltage Input (Optional) -->
+                        <div class="mb-6">
+                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-2">System Voltage (Optional)</label>
+                            <div class="relative">
+                                <div class="absolute left-4 top-3 text-gray-400 text-lg">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <input type="number" id="parallel-voltage" class="w-full pl-12 pr-16 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-lg" placeholder="0.00" step="any">
+                                <span class="absolute right-4 top-3 text-gray-500 text-lg">Volts</span>
+                            </div>
+                        </div>
+
+                        <!-- Resistor Inputs -->
+                        <div class="space-y-4 mb-6">
+                            <div id="parallel-resistors">
+                                <div class="parallel-resistor-input">
+                                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-2">R1 Resistance</label>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="relative flex-1">
+                                            <div class="absolute left-4 top-3 text-gray-400 text-lg">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                                                </svg>
+                                            </div>
+                                            <input type="number" class="parallel-resistor w-full pl-12 pr-16 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-lg" placeholder="0.00" step="any">
+                                            <span class="absolute right-4 top-3 text-gray-500 text-lg">Ω</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="parallel-resistor-input">
+                                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-2">R2 Resistance</label>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="relative flex-1">
+                                            <div class="absolute left-4 top-3 text-gray-400 text-lg">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                                                </svg>
+                                            </div>
+                                            <input type="number" class="parallel-resistor w-full pl-12 pr-16 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-lg" placeholder="0.00" step="any">
+                                            <span class="absolute right-4 top-3 text-gray-500 text-lg">Ω</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="calculateParallel()" class="calculate-btn w-full text-white py-3 rounded-lg font-semibold text-lg">
+                            Solve Parallel Circuit →
+                        </button>
+                        
+                        <div id="parallel-result" class="hidden mt-6 p-6 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl text-white">
+                            <div class="text-2xl font-bold mb-2">Total Resistance</div>
+                            <div id="parallel-result-value" class="text-3xl font-bold"></div>
+                            <div class="text-lg opacity-90">Ohms (Ω)</div>
+                            <div id="parallel-current-result" class="mt-4 hidden">
+                                <div class="text-lg font-semibold mb-1">Total Current</div>
+                                <div id="parallel-current-value" class="text-2xl font-bold"></div>
+                                <div class="text-base opacity-90">Amps (A)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Section -->
+                <div id="about-section" class="tab-content hidden">
+                    <!-- About Navigation -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">About Voltage Calculator</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <button onclick="showAboutSection('privacy')" class="about-nav-btn p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors text-center">
+                                <div class="text-2xl mb-2">🔒</div>
+                                <div class="font-medium text-gray-800">Privacy Policy</div>
+                                <div class="text-xs text-gray-500 mt-1">How we protect your data</div>
+                            </button>
+                            <button onclick="showAboutSection('terms')" class="about-nav-btn p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors text-center">
+                                <div class="text-2xl mb-2">📋</div>
+                                <div class="font-medium text-gray-800">Terms of Service</div>
+                                <div class="text-xs text-gray-500 mt-1">Rules and guidelines</div>
+                            </button>
+                            <button onclick="showAboutSection('contact')" class="about-nav-btn p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors text-center">
+                                <div class="text-2xl mb-2">📧</div>
+                                <div class="font-medium text-gray-800">Contact</div>
+                                <div class="text-xs text-gray-500 mt-1">Get in touch</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Policy Section -->
+                    <div id="privacy-content" class="about-content hidden bg-white rounded-xl shadow-lg p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Privacy Policy</h2>
+                        <div class="prose max-w-none">
+                            <p class="text-gray-600 mb-4">Last updated: January 2026</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Information We Collect</h3>
+                            <p class="text-gray-600 mb-4">Voltage Calculator is a client-side application that performs all calculations locally in your browser. We do not collect, store, or transmit any personal information or calculation data to external servers.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Local Storage</h3>
+                            <p class="text-gray-600 mb-4">The application uses browser localStorage to save your recent calculations history. This data is stored locally on your device and is not accessible to us or third parties.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Cookies and Tracking</h3>
+                            <p class="text-gray-600 mb-4">We do not use cookies or any tracking technologies. The application does not contain any analytics or advertising scripts.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Data Security</h3>
+                            <p class="text-gray-600 mb-4">Since all calculations are performed locally in your browser, your data never leaves your device, ensuring maximum privacy and security.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Third-Party Services</h3>
+                            <p class="text-gray-600 mb-4">We use Tailwind CSS CDN for styling. No other third-party services are integrated into this application.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Children's Privacy</h3>
+                            <p class="text-gray-600 mb-4">This application does not collect any personal information and is suitable for users of all ages.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Changes to This Policy</h3>
+                            <p class="text-gray-600 mb-4">We may update this privacy policy from time to time. Any changes will be reflected on this page.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Contact Us</h3>
+                            <p class="text-gray-600 mb-4">If you have questions about this Privacy Policy, please contact us through the Contact section.</p>
+                        </div>
+                    </div>
+
+                    <!-- Terms of Service Section -->
+                    <div id="terms-content" class="about-content hidden bg-white rounded-xl shadow-lg p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Terms of Service</h2>
+                        <div class="prose max-w-none">
+                            <p class="text-gray-600 mb-4">Last updated: January 2026</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Acceptance of Terms</h3>
+                            <p class="text-gray-600 mb-4">By using Voltage Calculator, you agree to these Terms of Service.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Description of Service</h3>
+                            <p class="text-gray-600 mb-4">Voltage Calculator is a free educational tool that provides electrical calculations including Ohm's Law, series and parallel circuits, and power calculations.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Accuracy of Calculations</h3>
+                            <p class="text-gray-600 mb-4">While we strive to provide accurate calculations, this tool is for educational and reference purposes only. Always verify critical calculations with professional tools or consult with a qualified engineer.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Permitted Use</h3>
+                            <p class="text-gray-600 mb-4">You may use this application for personal, educational, and commercial purposes. You may not redistribute, modify, or create derivative works without permission.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Disclaimer of Warranties</h3>
+                            <p class="text-gray-600 mb-4">This application is provided "as is" without any warranties, express or implied. We make no guarantees about the accuracy or reliability of the calculations.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Limitation of Liability</h3>
+                            <p class="text-gray-600 mb-4">In no event shall we be liable for any damages arising from the use or inability to use this application, including but not limited to direct, indirect, incidental, or consequential damages.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Intellectual Property</h3>
+                            <p class="text-gray-600 mb-4">All content, features, and functionality of this application are owned by us and protected by copyright, trademark, and other intellectual property laws.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Termination</h3>
+                            <p class="text-gray-600 mb-4">We reserve the right to terminate or suspend access to this application at any time, without notice or liability.</p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Changes to Terms</h3>
+                            <p class="text-gray-600 mb-4">We may modify these terms at any time. Continued use of the application constitutes acceptance of any changes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Contact Section -->
+                    <div id="contact-content" class="about-content hidden bg-white rounded-xl shadow-lg p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Contact Us</h2>
+                        <div class="prose max-w-none">
+                            <p class="text-gray-600 mb-6">We value your feedback and are here to help with any questions or suggestions about Voltage Calculator.</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                        <span class="text-xl mr-2">🐛</span> Report a Bug
+                                    </h3>
+                                    <p class="text-gray-600 text-sm">Found an issue with our calculations? Let us know so we can fix it.</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                        <span class="text-xl mr-2">💡</span> Feature Request
+                                    </h3>
+                                    <p class="text-gray-600 text-sm">Have an idea for a new feature? We'd love to hear it!</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                        <span class="text-xl mr-2">❓</span> General Question
+                                    </h3>
+                                    <p class="text-gray-600 text-sm">Need help using the calculator or have a question?</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                        <span class="text-xl mr-2">🤝</span> Collaboration
+                                    </h3>
+                                    <p class="text-gray-600 text-sm">Interested in partnering or working together?</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-blue-50 rounded-lg p-6">
+                                <h3 class="font-semibold text-gray-800 mb-4">Get in Touch</h3>
+                                <p class="text-gray-600 mb-4">The best way to reach us is through GitHub. You can:</p>
+                                <ul class="text-gray-600 space-y-2 mb-4">
+                                    <li>• Open an issue for bugs or feature requests</li>
+                                    <li>• Start a discussion for general questions</li>
+                                    <li>• Contribute to the project with pull requests</li>
+                                </ul>
+                                <div class="bg-white rounded-lg p-4 border border-blue-200">
+                                    <p class="text-sm text-gray-600 mb-2">Visit our GitHub repository:</p>
+                                    <code class="bg-gray-100 px-3 py-2 rounded text-sm">github.com/your-username/voltage-calculator</code>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 text-center">
+                                <p class="text-gray-500 text-sm">We typically respond within 24-48 hours during business days.</p>
+                                <p class="text-gray-500 text-sm mt-2">Thank you for using Voltage Calculator! ⚡</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="xl:col-span-1">
+                <div class="bg-white rounded-xl shadow-lg p-4 lg:p-6">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <h3 class="text-lg font-semibold text-gray-800">Recent Calculations</h3>
+                    </div>
+                    <div id="recent-calculations" class="space-y-3">
+                        <div class="text-gray-400 text-center py-8">
+                            <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <p>No calculations yet.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ohm's Law Educational Section -->
+                <div class="bg-white rounded-xl shadow-lg p-4 lg:p-6 mt-4 lg:mt-6">
+                    <h3 class="text-base lg:text-lg font-semibold text-gray-800 mb-3">Ohm's Law & Electrical Power - Complete Guide</h3>
+                    <p class="text-sm text-gray-600 mb-4">Learn the fundamentals of voltage calculation, Ohm's Law formulas, and electrical power calculations. Essential knowledge for electrical engineering and circuit analysis.</p>
+                    
+                    <!-- Ohm's Law Section -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-700 mb-2">Ohm's Law</h4>
+                        <p class="text-gray-600 text-xs lg:text-sm leading-relaxed mb-3">
+                            Ohm's Law states that the current through a conductor between two points is directly proportional to the voltage. This is true for many materials, over a wide range of voltages and currents, and the resistance and conductance of electronic components made from these materials remain constant.
+                        </p>
+                        <div class="bg-gray-50 rounded-lg p-3 lg:p-4">
+                            <div class="text-center mb-3">
+                                <div class="inline-block bg-blue-100 text-blue-800 px-3 py-2 rounded-lg font-mono font-semibold text-sm lg:text-base">
+                                    V = I × R
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 text-center">
+                                <div class="bg-white rounded-lg p-2 border border-gray-200">
+                                    <div class="font-mono text-sm lg:text-base">R = V / I</div>
+                                    <div class="text-xs text-gray-500 mt-1">Resistance</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-2 border border-gray-200">
+                                    <div class="font-mono text-sm lg:text-base">I = V / R</div>
+                                    <div class="text-xs text-gray-500 mt-1">Current</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-2 border border-gray-200">
+                                    <div class="font-mono text-sm lg:text-base">V = I × R</div>
+                                    <div class="text-xs text-gray-500 mt-1">Voltage</div>
+                                </div>
+                            </div>
+                            <div class="mt-3 text-xs text-gray-600">
+                                <strong>Where:</strong> V is voltage in Volts, R is resistance in Ohms, I is current in Amperes
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Electrical Power Section -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-700 mb-2">Electrical Power</h4>
+                        <p class="text-gray-600 text-xs lg:text-sm leading-relaxed mb-3">
+                            Power is the rate at which electrical energy is transferred by an electric circuit per unit time typically expressed in the SI unit of Watts. In resistive circuits, Joule's Law can be combined with Ohm's Law to produce alternative expressions for power dissipation.
+                        </p>
+                        <div class="bg-gray-50 rounded-lg p-3 lg:p-4">
+                            <div class="text-center mb-3">
+                                <div class="inline-block bg-green-100 text-green-800 px-3 py-2 rounded-lg font-mono font-semibold text-sm lg:text-base">
+                                    P = V × I
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 text-center">
+                                <div class="bg-white rounded-lg p-2 border border-gray-200">
+                                    <div class="font-mono text-sm lg:text-base">P = V² / R</div>
+                                    <div class="text-xs text-gray-500 mt-1">Power (Voltage)</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-2 border border-gray-200">
+                                    <div class="font-mono text-sm lg:text-base">P = I² × R</div>
+                                    <div class="text-xs text-gray-500 mt-1">Power (Current)</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-2 border border-gray-200">
+                                    <div class="font-mono text-sm lg:text-base">P = V × I</div>
+                                    <div class="text-xs text-gray-500 mt-1">Power (Basic)</div>
+                                </div>
+                            </div>
+                            <div class="mt-3 text-xs text-gray-600">
+                                <strong>Where:</strong> P is power in Watts
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formula Wheel -->
+                    <div>
+                        <h4 class="font-semibold text-gray-700 mb-2">Ohm's Law Formula Wheel</h4>
+                        <p class="text-gray-600 text-xs lg:text-sm leading-relaxed mb-3">
+                            Below is a formula wheel for Ohm's Law relationships between P, I, V, and R. To use the wheel, choose the variable to solve for in the middle of the wheel, then use the relationship for the two known variables within the cross section of the circle.
+                        </p>
+                        <div class="bg-gray-50 rounded-lg p-4 flex justify-center">
+                            <div class="relative w-48 h-48 lg:w-64 lg:h-64">
+                                <!-- Circle -->
+                                <div class="absolute inset-0 border-4 border-blue-500 rounded-full"></div>
+                                
+                                <!-- Center circle -->
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 lg:w-20 lg:h-20 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xs lg:text-sm">
+                                    <div class="text-center">
+                                        <div>P</div>
+                                        <div>I</div>
+                                        <div>V</div>
+                                        <div>R</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Top - V -->
+                                <div class="absolute top-2 left-1/2 transform -translate-x-1/2 bg-white rounded-lg px-2 py-1 text-xs lg:text-sm font-semibold border border-gray-300">
+                                    V = I × R
+                                </div>
+                                
+                                <!-- Right - I -->
+                                <div class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white rounded-lg px-2 py-1 text-xs lg:text-sm font-semibold border border-gray-300">
+                                    I = V / R
+                                </div>
+                                
+                                <!-- Bottom - R -->
+                                <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-white rounded-lg px-2 py-1 text-xs lg:text-sm font-semibold border border-gray-300">
+                                    R = V / I
+                                </div>
+                                
+                                <!-- Left - P -->
+                                <div class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white rounded-lg px-2 py-1 text-xs lg:text-sm font-semibold border border-gray-300">
+                                    P = V × I
+                                </div>
+                                
+                                <!-- Diagonal formulas -->
+                                <div class="absolute top-1/4 right-1/4 bg-white rounded px-1 py-0.5 text-xs border border-gray-300">
+                                    P = I²R
+                                </div>
+                                
+                                <div class="absolute top-1/4 left-1/4 bg-white rounded px-1 py-0.5 text-xs border border-gray-300">
+                                    P = V²/R
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">© 2026 Voltage Calculator. All rights reserved.</p>
+            <p class="text-xs mt-2">
+                <a href="#" onclick="showAboutSection()" class="text-blue-400 hover:text-blue-300 transition-colors">About</a> | 
+                <a href="#" onclick="showAboutSection('privacy')" class="text-blue-400 hover:text-blue-300 transition-colors">Privacy Policy</a> | 
+                <a href="#" onclick="showAboutSection('terms')" class="text-blue-400 hover:text-blue-300 transition-colors">Terms of Service</a> | 
+                <a href="#" onclick="showAboutSection('contact')" class="text-blue-400 hover:text-blue-300 transition-colors">Contact</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedCalculation = 'voltage';
+        let recentCalculations = [];
+        let seriesResistorCount = 2;
+        let parallelResistorCount = 2;
+
+        // Load recent calculations from cache on page load
+        function loadRecentCalculations() {
+            const cached = localStorage.getItem('voltageCalculatorRecent');
+            if (cached) {
+                try {
+                    recentCalculations = JSON.parse(cached);
+                    updateRecentCalculationsDisplay();
+                } catch (e) {
+                    console.error('Error loading cached calculations:', e);
+                    recentCalculations = [];
+                }
+            }
+        }
+
+        // Save recent calculations to cache
+        function saveRecentCalculations() {
+            try {
+                localStorage.setItem('voltageCalculatorRecent', JSON.stringify(recentCalculations));
+            } catch (e) {
+                console.error('Error saving calculations to cache:', e);
+            }
+        }
+
+        function switchTab(tab) {
+            // Hide all sections
+            document.querySelectorAll('.tab-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Hide about section when switching to calculator tabs
+            document.getElementById('about-section').classList.add('hidden');
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('text-gray-600', 'hover:text-gray-800');
+            });
+            
+            // Remove active class from about nav buttons
+            document.querySelectorAll('.about-nav-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-100', 'border-blue-300');
+                btn.classList.add('bg-gray-50');
+            });
+            
+            // Show selected section and activate tab
+            document.getElementById(`${tab}-section`).classList.remove('hidden');
+            document.getElementById(`tab-${tab}`).classList.add('tab-active');
+            document.getElementById(`tab-${tab}`).classList.remove('text-gray-600', 'hover:text-gray-800');
+        }
+
+        function selectCalculation(type) {
+            selectedCalculation = type;
+            
+            // Remove selected class from all cards with animation
+            document.querySelectorAll('.calc-card').forEach(card => {
+                card.classList.remove('card-selected');
+                card.style.transform = 'scale(1)';
+            });
+            
+            // Add selected class to clicked card with animation
+            const selectedCard = document.getElementById(`card-${type}`);
+            selectedCard.classList.add('card-selected');
+            
+            // Add a pulse animation for emphasis
+            selectedCard.style.animation = 'pulse 0.3s ease-in-out';
+            setTimeout(() => {
+                selectedCard.style.animation = '';
+            }, 300);
+            
+            // Update input fields based on selection
+            updateInputFields(type);
+        }
+
+        function updateInputFields(calcType) {
+            // Hide all input groups
+            document.querySelectorAll('.input-group').forEach(group => {
+                group.classList.add('hidden');
+            });
+            
+            // Show relevant input groups
+            switch(calcType) {
+                case 'voltage':
+                    document.getElementById('input-current').classList.remove('hidden');
+                    document.getElementById('input-resistance').classList.remove('hidden');
+                    document.getElementById('input-power').classList.remove('hidden');
+                    break;
+                case 'current':
+                    document.getElementById('input-voltage').classList.remove('hidden');
+                    document.getElementById('input-resistance').classList.remove('hidden');
+                    document.getElementById('input-power').classList.remove('hidden');
+                    break;
+                case 'resistance':
+                    document.getElementById('input-voltage').classList.remove('hidden');
+                    document.getElementById('input-current').classList.remove('hidden');
+                    document.getElementById('input-power').classList.remove('hidden');
+                    break;
+                case 'power':
+                    document.getElementById('input-voltage').classList.remove('hidden');
+                    document.getElementById('input-current').classList.remove('hidden');
+                    document.getElementById('input-resistance').classList.remove('hidden');
+                    break;
+            }
+        }
+
+        function calculateOhmsLaw() {
+            let result = 0;
+            let unit = '';
+            let formula = '';
+            
+            const voltage = parseFloat(document.getElementById('voltage-value').value) || 0;
+            const current = parseFloat(document.getElementById('current-value').value) || 0;
+            const resistance = parseFloat(document.getElementById('resistance-value').value) || 0;
+            const power = parseFloat(document.getElementById('power-value').value) || 0;
+            
+            switch(selectedCalculation) {
+                case 'voltage':
+                    if (current > 0 && resistance > 0) {
+                        result = current * resistance;
+                        unit = 'Volts';
+                        formula = 'V = I × R';
+                    } else if (power > 0 && current > 0) {
+                        result = power / current;
+                        unit = 'Volts';
+                        formula = 'V = P / I';
+                    } else if (power > 0 && resistance > 0) {
+                        result = Math.sqrt(power * resistance);
+                        unit = 'Volts';
+                        formula = 'V = √(P × R)';
+                    }
+                    break;
+                case 'current':
+                    if (voltage > 0 && resistance > 0) {
+                        result = voltage / resistance;
+                        unit = 'Amps';
+                        formula = 'I = V / R';
+                    } else if (power > 0 && voltage > 0) {
+                        result = power / voltage;
+                        unit = 'Amps';
+                        formula = 'I = P / V';
+                    } else if (power > 0 && resistance > 0) {
+                        result = Math.sqrt(power / resistance);
+                        unit = 'Amps';
+                        formula = 'I = √(P / R)';
+                    }
+                    break;
+                case 'resistance':
+                    if (voltage > 0 && current > 0) {
+                        result = voltage / current;
+                        unit = 'Ohms';
+                        formula = 'R = V / I';
+                    } else if (voltage > 0 && power > 0) {
+                        result = (voltage * voltage) / power;
+                        unit = 'Ohms';
+                        formula = 'R = V² / P';
+                    } else if (power > 0 && current > 0) {
+                        result = power / (current * current);
+                        unit = 'Ohms';
+                        formula = 'R = P / I²';
+                    }
+                    break;
+                case 'power':
+                    if (voltage > 0 && current > 0) {
+                        result = voltage * current;
+                        unit = 'Watts';
+                        formula = 'P = V × I';
+                    } else if (voltage > 0 && resistance > 0) {
+                        result = (voltage * voltage) / resistance;
+                        unit = 'Watts';
+                        formula = 'P = V² / R';
+                    } else if (current > 0 && resistance > 0) {
+                        result = current * current * resistance;
+                        unit = 'Watts';
+                        formula = 'P = I² × R';
+                    }
+                    break;
+            }
+            
+            if (result > 0) {
+                displayResult(result, unit, formula);
+                addToRecentCalculations(selectedCalculation, result, unit, formula);
+            } else {
+                alert('Please enter valid values for at least 2 fields to calculate the third.');
+            }
+        }
+
+        function displayResult(value, unit, formula) {
+            const resultDisplay = document.getElementById('result-display');
+            const resultValue = document.getElementById('result-value');
+            const resultUnit = document.getElementById('result-unit');
+            
+            resultValue.textContent = value.toFixed(4);
+            resultUnit.textContent = `${unit} (${formula})`;
+            resultDisplay.classList.remove('hidden');
+        }
+
+        function addToRecentCalculations(type, value, unit, formula) {
+            const calculation = {
+                type: type.charAt(0).toUpperCase() + type.slice(1),
+                value: value.toFixed(4),
+                unit: unit,
+                formula: formula,
+                timestamp: new Date().toLocaleTimeString(),
+                date: new Date().toLocaleDateString()
+            };
+            
+            recentCalculations.unshift(calculation);
+            if (recentCalculations.length > 10) {
+                recentCalculations.pop();
+            }
+            
+            updateRecentCalculationsDisplay();
+            saveRecentCalculations();
+        }
+
+        function updateRecentCalculationsDisplay() {
+            const container = document.getElementById('recent-calculations');
+            
+            if (recentCalculations.length === 0) {
+                container.innerHTML = `
+                    <div class="text-gray-400 text-center py-8">
+                        <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <p>No calculations yet.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = recentCalculations.map(calc => `
+                <div class="bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-medium text-gray-800">${calc.type}</div>
+                            <div class="text-sm text-gray-600">${calc.value} ${calc.unit}</div>
+                            <div class="text-xs text-gray-500">${calc.formula}</div>
+                        </div>
+                        <div class="text-xs text-gray-400 text-right">
+                            <div>${calc.timestamp}</div>
+                            <div class="text-xs">${calc.date}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addSeriesResistor() {
+            seriesResistorCount++;
+            const container = document.getElementById('series-resistors');
+            const newResistor = document.createElement('div');
+            newResistor.className = 'series-resistor-input';
+            newResistor.innerHTML = `
+                <label class="block text-xs font-semibold text-gray-600 uppercase mb-2">R${seriesResistorCount} Resistance</label>
+                <div class="flex items-center space-x-2">
+                    <button onclick="this.parentElement.parentElement.remove()" class="flex-shrink-0 p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                    <div class="relative flex-1">
+                        <div class="absolute left-4 top-3 text-gray-400 text-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                            </svg>
+                        </div>
+                        <input type="number" class="series-resistor w-full pl-12 pr-16 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-lg" placeholder="0.00" step="any">
+                        <span class="absolute right-4 top-3 text-gray-500 text-lg">Ω</span>
+                    </div>
+                </div>
+            `;
+            container.appendChild(newResistor);
+        }
+
+        function addParallelResistor() {
+            parallelResistorCount++;
+            const container = document.getElementById('parallel-resistors');
+            const newResistor = document.createElement('div');
+            newResistor.className = 'parallel-resistor-input';
+            newResistor.innerHTML = `
+                <label class="block text-xs font-semibold text-gray-600 uppercase mb-2">R${parallelResistorCount} Resistance</label>
+                <div class="flex items-center space-x-2">
+                    <button onclick="this.parentElement.parentElement.remove()" class="flex-shrink-0 p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                    <div class="relative flex-1">
+                        <div class="absolute left-4 top-3 text-gray-400 text-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                            </svg>
+                        </div>
+                        <input type="number" class="parallel-resistor w-full pl-12 pr-16 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-lg" placeholder="0.00" step="any">
+                        <span class="absolute right-4 top-3 text-gray-500 text-lg">Ω</span>
+                    </div>
+                </div>
+            `;
+            container.appendChild(newResistor);
+        }
+
+        function calculateSeries() {
+            const resistors = document.querySelectorAll('.series-resistor');
+            let totalResistance = 0;
+            let validInputs = true;
+            
+            resistors.forEach(input => {
+                const value = parseFloat(input.value);
+                if (isNaN(value) || value <= 0) {
+                    validInputs = false;
+                } else {
+                    totalResistance += value;
+                }
+            });
+            
+            if (validInputs && totalResistance > 0) {
+                document.getElementById('series-result-value').textContent = totalResistance.toFixed(4);
+                
+                // Calculate current if voltage is provided
+                const systemVoltage = parseFloat(document.getElementById('series-voltage').value);
+                const currentResult = document.getElementById('series-current-result');
+                
+                if (!isNaN(systemVoltage) && systemVoltage > 0) {
+                    const totalCurrent = systemVoltage / totalResistance;
+                    document.getElementById('series-current-value').textContent = totalCurrent.toFixed(4);
+                    currentResult.classList.remove('hidden');
+                } else {
+                    currentResult.classList.add('hidden');
+                }
+                
+                document.getElementById('series-result').classList.remove('hidden');
+                addToRecentCalculations('series', totalResistance, 'Ohms', 'R_total = R1 + R2 + ...');
+            } else {
+                alert('Please enter valid positive values for all resistors.');
+            }
+        }
+
+        function calculateParallel() {
+            const resistors = document.querySelectorAll('.parallel-resistor');
+            let totalConductance = 0;
+            let validInputs = true;
+            
+            resistors.forEach(input => {
+                const value = parseFloat(input.value);
+                if (isNaN(value) || value <= 0) {
+                    validInputs = false;
+                } else {
+                    totalConductance += 1 / value;
+                }
+            });
+            
+            if (validInputs && totalConductance > 0) {
+                const totalResistance = 1 / totalConductance;
+                document.getElementById('parallel-result-value').textContent = totalResistance.toFixed(4);
+                
+                // Calculate current if voltage is provided
+                const systemVoltage = parseFloat(document.getElementById('parallel-voltage').value);
+                const currentResult = document.getElementById('parallel-current-result');
+                
+                if (!isNaN(systemVoltage) && systemVoltage > 0) {
+                    const totalCurrent = systemVoltage / totalResistance;
+                    document.getElementById('parallel-current-value').textContent = totalCurrent.toFixed(4);
+                    currentResult.classList.remove('hidden');
+                } else {
+                    currentResult.classList.add('hidden');
+                }
+                
+                document.getElementById('parallel-result').classList.remove('hidden');
+                addToRecentCalculations('parallel', totalResistance, 'Ohms', '1/R_total = 1/R1 + 1/R2 + ...');
+            } else {
+                alert('Please enter valid positive values for all resistors.');
+            }
+        }
+
+        // About section navigation
+        function showAboutSection(section) {
+            // Hide all main tab sections
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show about section
+            document.getElementById('about-section').classList.remove('hidden');
+            
+            // Remove active class from all main tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('text-gray-600', 'hover:text-gray-800');
+            });
+            
+            // Hide all about content sections
+            document.querySelectorAll('.about-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected section or default to privacy
+            const targetSection = section || 'privacy';
+            document.getElementById(`${targetSection}-content`).classList.remove('hidden');
+            
+            // Update about nav button states
+            document.querySelectorAll('.about-nav-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-100', 'border-blue-300');
+                btn.classList.add('bg-gray-50');
+            });
+            
+            // Highlight the correct about nav button
+            const targetButton = document.querySelector(`[onclick="showAboutSection('${targetSection}')"]`);
+            if (targetButton) {
+                targetButton.classList.remove('bg-gray-50');
+                targetButton.classList.add('bg-blue-100', 'border-blue-300');
+            }
+        }
+
+        // Initialize
+        updateInputFields('voltage');
+        loadRecentCalculations();
+
+        // Add keyboard support
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const activeElement = document.activeElement;
+                if (activeElement.tagName === 'INPUT') {
+                    const activeSection = document.querySelector('.tab-content:not(.hidden)');
+                    if (activeSection.id === 'ohms-section') {
+                        calculateOhmsLaw();
+                    } else if (activeSection.id === 'series-section') {
+                        calculateSeries();
+                    } else if (activeSection.id === 'parallel-section') {
+                        calculateParallel();
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
